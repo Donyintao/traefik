@@ -1,6 +1,6 @@
 # traefik 简介
 
-traefik(https://traefik.io/)是一款开源的反向代理与负载均衡工具。非常适合与微服务系统结合，可以实现自动化动态配置。目前支持Docker，Swarm，Mesos/Marathon，Mesos，Kubernetes，Consul，Etcd，Zookeeper，BoltDB，Rest API等等后端模型。
+traefik(https://traefik.io/) 是一款开源的反向代理与负载均衡工具。非常适合与微服务系统结合，可以实现自动化动态配置。目前支持Docker，Swarm，Mesos/Marathon，Mesos，Kubernetes，Consul，Etcd，Zookeeper，BoltDB，Rest API等等后端模型。
 
 ## 为什么选择 traefik？
 
