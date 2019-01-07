@@ -21,11 +21,12 @@ traefik(https://traefik.io/) 是一款开源的反向代理与负载均衡工具
 ``` bash
 # mkdir -p /tmp/sslTmp && cd /tmp/sslTmp
 # openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=traefik-ui.testing.com"
+# kubectl create secret generic traefik-cert --from-file=tls.crt --from-file=tls.key -n kube-system
 ```
 
 #### Kubernetes ConfigMap配置
 
-说明： 同时允许访问80和443
+说明: 同时允许http和https服务
 
 ``` bash
 # vim traefik.toml
@@ -39,6 +40,27 @@ defaultEntryPoints = ["http","https"]
       [[entryPoints.https.tls.certificates]]
       CertFile = "/ssl/tls.crt"
       KeyFile = "/ssl/tls.key"
+       
+# kubectl create configmap traefik-conf --from-file=traefik.toml -n kube-system
+```
+
+说明: 只允许https服务
+
+``` bash
+defaultEntryPoints = ["http","https"]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/ssl/tls.crt"
+      keyFile = "/ssl/tls.key"
+      
+# kubectl create configmap traefik-conf --from-file=traefik.toml -n kube-system
 ```
 
 #### Traefik install
