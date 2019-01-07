@@ -73,7 +73,7 @@ defaultEntryPoints = ["http","https"]
 #### Traefik Ingress
 
 ``` bash
-# https://raw.githubusercontent.com/Donyintao/traefik/master/traefik-ingress.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/traefik/master/traefik-ingress.yaml
 ```
 
 #### 验证
